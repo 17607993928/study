@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  servlet:
+    context-path:
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/notes
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  redis:
+    database: 0
+    host: 192.168.0.1
+    port: 6379
+    password: 123
+    timeout: 1000
+
+
+
+mybatis-plus:
+  mapper-locations: classpath:com/example/swagger/**/mapper/*Mapper.xml
+  typeAliasesPackage: com.example.swagger.**.domian
+  global-config:
+    db-config:
+      id-type: id_worker # 主键自动生成策略（雪花算法）
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+    db-column-underline: true
+  configuration:
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#log sql
+logging:
+  level:
+    com.xjs.dnf.dao: DEBUG
+
+# Swagger
+swagger:
+  title: API 文档接口
+  description: 这是xiejs编写的文档接口
+  version: 1.0.0
+  termsOfServiceUrl: https://www.sscai.club
+  contact:
+    name: 爸爸
+    url: https://www.Act.com
+    email: xjs6666666@163.com
+
+# 高德天气api
+weather:
+  key: 7e9d7c12296f333b1749ac3f1c081fd9
+  city: 杭州  #城市名
+  type: base  #实时天气
+
