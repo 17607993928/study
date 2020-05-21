@@ -1,6 +1,6 @@
 package com.example.swagger.user.domain.bo;
 
-import io.swagger.annotations.Api;
+import com.example.swagger.user.enums.SexEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -30,5 +30,8 @@ public class UserBO {
     @Size(max = 25, message = "姓名在25个字符之内")
     @ApiModelProperty(value = "姓名")
     private String personName;
+
+
+    private SexEnum sex;
 
 }

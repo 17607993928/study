@@ -1,5 +1,6 @@
 package com.example.swagger.user.domain.dto;
 
+import com.example.swagger.user.enums.SexEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -19,4 +20,6 @@ public class UserDTO {
 
     @ApiModelProperty(value = "姓名")
     private String personName;
+
+    private SexEnum sex;
 }

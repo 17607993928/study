@@ -33,6 +33,9 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+  type-enums-package: com.example.**.enums.*  #枚举扫描包
+
+
 #log sql
 logging:
   level:

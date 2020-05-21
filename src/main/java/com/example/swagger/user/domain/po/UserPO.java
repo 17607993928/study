@@ -1,6 +1,7 @@
 package com.example.swagger.user.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.swagger.user.enums.SexEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,4 +25,5 @@ public class UserPO implements Serializable {
 
     private Long personId;          //用户id
 
+    private SexEnum sex;
 }
