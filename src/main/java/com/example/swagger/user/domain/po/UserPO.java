@@ -1,6 +1,7 @@
 package com.example.swagger.user.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.example.swagger.user.enums.SexEnum;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("USER")
-public class UserPO implements Serializable {
+public class UserPO extends Model<UserPO> implements Serializable {
     private static final long serialVersionUID = 6270451087401009279L;
     private Long id;
 
