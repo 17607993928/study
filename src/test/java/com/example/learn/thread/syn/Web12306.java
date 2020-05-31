@@ -1,11 +1,11 @@
-package com.example.learn.thread;
+package com.example.learn.thread.syn;
 
 /**
  * @类描述:
  * @创建人:xiejs
  * @创建时间:
  */
-public class Web12306  implements Runnable{
+public class Web12306 implements Runnable{
     private  int  num=99;
 
 

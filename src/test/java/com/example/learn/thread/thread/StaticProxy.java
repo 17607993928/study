@@ -1,4 +1,4 @@
-package com.example.learn.thread;
+package com.example.learn.thread.thread;
 
 /**
  * @类描述:静态代理

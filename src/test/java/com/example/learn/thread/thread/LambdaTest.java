@@ -1,4 +1,4 @@
-package com.example.learn.thread;
+package com.example.learn.thread.thread;
 
 /**
  * @创建人 xjs

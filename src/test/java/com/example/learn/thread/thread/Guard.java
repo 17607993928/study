@@ -1,6 +1,4 @@
-package com.example.learn.thread;
-
-import com.baomidou.mybatisplus.extension.api.R;
+package com.example.learn.thread.thread;
 
 /**
  * @创建人 xjs
