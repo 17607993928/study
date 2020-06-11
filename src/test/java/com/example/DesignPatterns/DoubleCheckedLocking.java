@@ -1,4 +1,4 @@
-package com.example.learn.thread.other;
+package com.example.DesignPatterns;
 
 /**
  * @类描述:单例  懒汉式  +  并发

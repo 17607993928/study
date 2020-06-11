@@ -1,4 +1,4 @@
-package com.example.learn.thread.thread;
+package com.example.DesignPatterns;
 
 /**
  * @类描述:静态代理
@@ -8,7 +8,7 @@ package com.example.learn.thread.thread;
 public class StaticProxy {
 
     public static void main(String[] args) {
-        new Proxy(new You()).happyMarry();
+        new Proxy().happyMarry();
     }
 
 }
@@ -17,7 +17,7 @@ interface Marry{
     void happyMarry();
 }
 
-class You implements Marry{
+class You implements Marry {
 
     @Override
     public void happyMarry() {
@@ -25,10 +25,10 @@ class You implements Marry{
     }
 }
 
-class Proxy implements Marry{
+class Proxy implements Marry {
     private Marry target;
-    public Proxy(Marry target) {
-        this.target=target;
+    public Proxy() {
+        this.target=new You();
     }
 
     @Override
