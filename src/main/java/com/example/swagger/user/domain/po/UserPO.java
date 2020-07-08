@@ -27,4 +27,9 @@ public class UserPO extends Model<UserPO> implements Serializable {
     private Long personId;          //用户id
 
     private SexEnum sex;
+
+
+    public void test(String name){
+        System.out.println("我的名字是："+name);
+    }
 }

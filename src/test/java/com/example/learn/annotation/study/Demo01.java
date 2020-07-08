@@ -1,5 +1,7 @@
 package com.example.learn.annotation.study;
 
+import java.lang.reflect.Method;
+
 /**
  * @类描述:注解
  * @创建人:xiejs
@@ -8,14 +10,27 @@ package com.example.learn.annotation.study;
 public class Demo01 extends Object {
 
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+
 
 //    @Info(studentName = "我是你爸爸",age = 19,id = 10086)
     public void test(){
         System.out.println("用于注解作用范围");
+    }
+
+
+    public static void main(String[] args) throws NoSuchMethodException, NoSuchFieldException {
+
+        Class<Student> clazz = Student.class;
+        Field annotation = clazz.getAnnotation(Field.class);
+        String s = annotation.columnName();
+        System.out.println(s);
+
+
+        java.lang.reflect.Field id = clazz.getDeclaredField("id");
+        id.setAccessible(true);
+        Field annotation1 = id.getAnnotation(Field.class);
+        int length = annotation1.length();
+        System.out.println(length);
     }
 }
 

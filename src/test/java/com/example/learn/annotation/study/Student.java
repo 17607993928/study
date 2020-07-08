@@ -8,8 +8,11 @@ import lombok.Data;
  * @创建时间:
  */
 @Data
-//@Tables("T_STUDENT")
+
+@Field(columnName = "xjs",type = "ces",length = 10)
 public class Student {
+
+    @Field(columnName = "xjs",type = "ces",length = 10)
     private int id;
     private int age;
     private String name;
