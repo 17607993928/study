@@ -1,7 +1,7 @@
-package com.example.swagger.common.tool.weather.business.controller;
+package com.example.swagger.tool.weather.business.controller;
 
-import com.example.swagger.common.tool.weather.business.GaodeWeather;
 import com.example.swagger.common.utils.AjaxMessage;
+import com.example.swagger.tool.weather.business.GaodeWeather;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

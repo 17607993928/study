@@ -1,4 +1,4 @@
-package com.example.swagger.common.tool.weather.business;
+package com.example.swagger.tool.weather.business;
 
 import java.util.Map;
 
@@ -13,5 +13,5 @@ public interface GaodeWeather {
      * @param parm 入参
      * @return
      */
-    void GetWeatherByCity(Map<String,String> parm);
+    void GetWeatherByCity(Map<String, String> parm);
 }

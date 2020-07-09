@@ -1,6 +1,6 @@
-package com.example.swagger.common.tool.scheduledtask;
+package com.example.swagger.tool.scheduledtask;
 
-import com.example.swagger.common.tool.weather.business.GaodeWeather;
+import com.example.swagger.tool.weather.business.GaodeWeather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

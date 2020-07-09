@@ -1,7 +1,7 @@
-package com.example.swagger.common.tool.weather.dao;
+package com.example.swagger.tool.weather.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.swagger.common.tool.weather.domain.WeatherPO;
+import com.example.swagger.tool.weather.domain.WeatherPO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

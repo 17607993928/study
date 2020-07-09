@@ -1,4 +1,4 @@
-package com.example.swagger.common.tool.weather.domain;
+package com.example.swagger.tool.weather.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

@@ -1,4 +1,4 @@
-package com.example.swagger.common.tool.IPLocation.business;
+package com.example.swagger.tool.IPLocation.business;
 
 import com.example.swagger.common.utils.PureNetUtil;
 import lombok.SneakyThrows;
