@@ -1,11 +1,11 @@
-package com.example.swagger.common.tool.weather.business.impl;
+package com.example.swagger.tool.weather.business.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.swagger.common.tool.weather.business.GaodeWeather;
-import com.example.swagger.common.tool.weather.dao.WeatherDao;
-import com.example.swagger.common.tool.weather.domain.WeatherPO;
 import com.example.swagger.common.utils.PureNetUtil;
+import com.example.swagger.tool.weather.business.GaodeWeather;
+import com.example.swagger.tool.weather.dao.WeatherDao;
+import com.example.swagger.tool.weather.domain.WeatherPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
