@@ -1,4 +1,4 @@
-package com.example.DesignPatterns;
+package com.example.DesignPatterns.SingletonPattern;
 
 /**
  * @类描述:单例  懒汉式  +  并发
