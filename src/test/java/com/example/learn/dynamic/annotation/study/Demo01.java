@@ -1,6 +1,4 @@
-package com.example.learn.annotation.study;
-
-import java.lang.reflect.Method;
+package com.example.learn.dynamic.annotation.study;
 
 /**
  * @类描述:注解

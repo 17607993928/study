@@ -1,6 +1,4 @@
-package com.example.learn.reflection;
-
-import com.example.swagger.user.domain.po.UserPO;
+package com.example.learn.dynamic.reflection;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,5 +38,10 @@ public class Demo01 {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void test(){
+        System.out.println("你把");
     }
 }

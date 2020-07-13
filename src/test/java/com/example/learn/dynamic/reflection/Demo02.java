@@ -1,4 +1,4 @@
-package com.example.learn.reflection;
+package com.example.learn.dynamic.reflection;
 
 import java.io.BufferedReader;
 import java.io.IOException;

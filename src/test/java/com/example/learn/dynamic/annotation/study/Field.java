@@ -1,4 +1,4 @@
-package com.example.learn.annotation.study;
+package com.example.learn.dynamic.annotation.study;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

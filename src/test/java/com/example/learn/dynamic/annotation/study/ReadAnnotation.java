@@ -1,4 +1,4 @@
-package com.example.learn.annotation.study;
+package com.example.learn.dynamic.annotation.study;
 
 /**
  * @类描述:使用反射读取注解信息
@@ -8,7 +8,7 @@ package com.example.learn.annotation.study;
 public class ReadAnnotation {
     public static void main(String[] args) {
         /*try {
-            Class<?> clazz = Class.forName("com.example.learn.annotation.study.Student");
+            Class<?> clazz = Class.forName("com.example.learn.dynamic.annotation.study.Student");
             Annotation[] annotations = clazz.getAnnotations();
             for (Annotation annotation : annotations) {
                 System.out.println(annotation);
