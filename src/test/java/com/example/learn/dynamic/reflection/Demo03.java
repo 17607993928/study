@@ -1,4 +1,4 @@
-package com.example.learn.reflection;
+package com.example.learn.dynamic.reflection;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
