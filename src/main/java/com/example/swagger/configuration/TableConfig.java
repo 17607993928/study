@@ -28,7 +28,6 @@ public class TableConfig {
     private static final String CREATE_TABLE="CREATE TABLE ";
 
 
-    @Bean
     public void createWeather() {
         StringBuilder sb = new StringBuilder(CREATE_TABLE);
 
