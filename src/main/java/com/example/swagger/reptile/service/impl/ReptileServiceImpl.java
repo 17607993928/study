@@ -76,8 +76,8 @@ public class ReptileServiceImpl implements ReptileService {
 
 
     public static void main(String[] args) throws IOException {
-        URL url = new URL("http://sc.chinaz.com/tupian/beijingtupian.html");
-        BufferedReader bfReed = new BufferedReader(new InputStreamReader(url.openStream()));
+        URL url = new URL("http://www.win4000.com/zt/gaoqing.html");
+        BufferedReader bfReed = new BufferedReader(new InputStreamReader(url.openStream(),"utf-8"));
 
         StringBuilder buff = new StringBuilder();
 
@@ -94,7 +94,7 @@ public class ReptileServiceImpl implements ReptileService {
 
         for (Element element : img) {
 
-            String imgSrc = element.attr("src2");
+            String imgSrc = element.attr("src");
 
             // 判断imgSrc是否为空且是否以"http://"开头
             if (!"".equals(imgSrc) && (imgSrc.startsWith("http://") || imgSrc.startsWith("https://"))) {
@@ -114,7 +114,7 @@ public class ReptileServiceImpl implements ReptileService {
                 file.mkdir();//创建文件夹
             }
 
-            String substring = imgUrl.substring(imgUrl.length() - 10);
+            String substring = imgUrl.substring(imgUrl.length() - 6);
             String[] split = substring.split("\\.");
 
 
@@ -128,7 +128,12 @@ public class ReptileServiceImpl implements ReptileService {
             while ((len=bfIn.read(bytes))!=-1){
                 bfOut.write(bytes,0,len);
             }
+
+            bfIn.close();
+            bfOut.close();
         }
+        bfReed.close();
+
     }
 
 
