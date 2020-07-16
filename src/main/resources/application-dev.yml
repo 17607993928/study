@@ -11,15 +11,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
-  redis:
-    database: 0
-    host: 192.168.0.1
-    port: 6379
-    password: 123
-    timeout: 1000
-
-
-
 mybatis-plus:
   mapper-locations: classpath:com/example/swagger/**/mapper/*Mapper.xml
   typeAliasesPackage: com.example.swagger.**.domian
@@ -32,9 +23,7 @@ mybatis-plus:
   configuration:
     jdbc-type-for-null: 'null'
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
   type-enums-package: com.example.**.enums.*  #枚举扫描包
-
 
 #log sql
 logging:

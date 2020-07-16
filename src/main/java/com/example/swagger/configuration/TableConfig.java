@@ -6,7 +6,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
@@ -28,7 +27,7 @@ public class TableConfig {
     private static final String CREATE_TABLE="CREATE TABLE ";
 
 
-    @Bean
+
     public void createWeather() {
         StringBuilder sb = new StringBuilder(CREATE_TABLE);
 
