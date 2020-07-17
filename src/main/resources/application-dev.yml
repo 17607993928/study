@@ -1,15 +1,27 @@
 server:
   port: 8080
   servlet:
-    context-path:
+    context-path: /study
 
 spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/notes
+    url: jdbc:mysql://localhost:3306/notes?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+
+  mvc:
+    view:
+      prefix: /  # 定位模板的目录
+      suffix: .html   # 给返回的页面添加后缀名
+#    static-path-pattern: /**
+
+  resources:
+    static-locations: classpath:/static/
+
+
+
 
 mybatis-plus:
   mapper-locations: classpath:com/example/swagger/**/mapper/*Mapper.xml
