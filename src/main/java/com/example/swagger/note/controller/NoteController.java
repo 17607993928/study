@@ -5,6 +5,7 @@ import com.example.swagger.note.service.NoteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +26,10 @@ public class NoteController {
     public String save(NotePO notePO){
         noteService.save(notePO);
         return "xxx";
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "下乡阿萨法萨芬";
     }
 }

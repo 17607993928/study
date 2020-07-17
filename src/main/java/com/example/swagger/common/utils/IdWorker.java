@@ -9,24 +9,26 @@ public class IdWorker {
     private long workerId; // 这个就是代表了机器id
     private long datacenterId; // 这个就是代表了机房id
     private long sequence; // 这个就是代表了一毫秒内生成的多个id的最新序号
+
     public IdWorker(long workerId, long datacenterId, long sequence) {
         // sanity check for workerId
         // 这儿不就检查了一下，要求就是你传递进来的机房id和机器id不能超过32，不能小于0
         if (workerId > maxWorkerId || workerId < 0) {
 
             throw new IllegalArgumentException(
-                    String.format("worker Id can't be greater than %d or less than 0",maxWorkerId));
+                    String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
 
         if (datacenterId > maxDatacenterId || datacenterId < 0) {
 
             throw new IllegalArgumentException(
-                    String.format("datacenter Id can't be greater than %d or less than 0",maxDatacenterId));
+                    String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
         this.workerId = workerId;
         this.datacenterId = datacenterId;
         this.sequence = sequence;
     }
+
     private long twepoch = 1288834974657L;
     private long workerIdBits = 5L;
     private long datacenterIdBits = 5L;
@@ -41,15 +43,19 @@ public class IdWorker {
     private long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
     private long sequenceMask = -1L ^ (-1L << sequenceBits);
     private long lastTimestamp = -1L;
-    public long getWorkerId(){
+
+    public long getWorkerId() {
         return workerId;
     }
+
     public long getDatacenterId() {
         return datacenterId;
     }
+
     public long getTimestamp() {
         return System.currentTimeMillis();
     }
+
     // 这个是核心方法，通过调用nextId()方法，让当前这台机器上的snowflake算法程序生成一个全局唯一的id
     public synchronized long nextId() {
         // 这儿就是获取当前时间戳，单位是毫秒
@@ -85,6 +91,7 @@ public class IdWorker {
                 (datacenterId << datacenterIdShift) |
                 (workerId << workerIdShift) | sequence;
     }
+
     private long tilNextMillis(long lastTimestamp) {
 
         long timestamp = timeGen();
@@ -94,7 +101,8 @@ public class IdWorker {
         }
         return timestamp;
     }
-    private long timeGen(){
+
+    private long timeGen() {
         return System.currentTimeMillis();
     }
 }
