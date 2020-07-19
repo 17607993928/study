@@ -1,15 +1,15 @@
 server:
-  port: 8080
+  port: 8080  #端口
   servlet:
-    context-path: /study
+    context-path: /study  #项目路径前缀
 
 spring:
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/notes?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
+    username: root  #数据库账号
+    password: root  #数据库密码
+    url: jdbc:mysql://localhost:3306/notes?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true  #数据库地址
+    driver-class-name: com.mysql.cj.jdbc.Driver  #数据库连接池
+    type: com.alibaba.druid.pool.DruidDataSource  #数据库连接池
 
   mvc:
     view:
@@ -18,14 +18,12 @@ spring:
 #    static-path-pattern: /**
 
   resources:
-    static-locations: classpath:/static/
-
-
+    static-locations: classpath:/static/  #静态资源地址
 
 
 mybatis-plus:
-  mapper-locations: classpath:com/example/swagger/**/mapper/*Mapper.xml
-  typeAliasesPackage: com.example.swagger.**.domian
+  mapper-locations: classpath:com/example/swagger/**/mapper/*Mapper.xml   #mapper扫描地址
+  typeAliasesPackage: com.example.swagger.**.domian     #类型别名包
   global-config:
     db-config:
       id-type: id_worker # 主键自动生成策略（雪花算法）
@@ -35,7 +33,7 @@ mybatis-plus:
   configuration:
     jdbc-type-for-null: 'null'
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-enums-package: com.example.**.enums.*  #枚举扫描包
+  type-enums-package: com.example.swagger.**.enums  #枚举扫描包
 
 #log sql
 logging:

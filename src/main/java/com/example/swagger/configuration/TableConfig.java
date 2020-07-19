@@ -26,11 +26,6 @@ public class TableConfig {
      */
     private static final String CREATE_TABLE="CREATE TABLE ";
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 162b6a1f4f69840dbd1462eb2c706f748b26ba79
     public void createWeather() {
         StringBuilder sb = new StringBuilder(CREATE_TABLE);
 

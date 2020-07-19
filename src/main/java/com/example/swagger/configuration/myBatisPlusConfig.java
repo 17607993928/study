@@ -1,5 +1,6 @@
 package com.example.swagger.configuration;
 
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
@@ -8,6 +9,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParser
 import com.example.swagger.common.mybatisplus.MySqlInjector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @类描述:my
@@ -29,19 +33,7 @@ public class myBatisPlusConfig {
         paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize());
         return paginationInterceptor;
     }
-
-    //
-    @Bean
-    public SqlExplainInterceptor sqlExplainInterceptor(){
-
-        SqlExplainInterceptor sqlExplainInterceptor=new SqlExplainInterceptor();
-
-        /*List<ISqlInjector> list=new ArrayList<>();
-        sqlExplainInterceptor.setSqlParserList(list);*/
-
-
-        return new SqlExplainInterceptor();
-    }
+    
 
     //性能分析插件
     @Bean

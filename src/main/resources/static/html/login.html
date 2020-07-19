@@ -8,10 +8,10 @@
 </head>
 <body>
 <div id="login">
-    <form method="post">
-        <input type="text" required="required" placeholder="用户名" name="">
-        <input type="password" required="required" placeholder="密码" name="">
-        <button class="but" type="submit">登录</button>
+    <form>
+        <input type="text" required="required" placeholder="用户名" v-model="username">
+        <input type="password" required="required" placeholder="密码" v-model="password">
+        <button id="doLogin" class="but" @click="login()">登录</button>
     </form>
 </div>
 
@@ -22,7 +22,20 @@
     new Vue({
         el:'#app',
         data: {
-            message:'hello vue.js.'
-        }
+            message:'hello vue.js.',
+            username:'',
+            password:'',
+        },
+        methods:{
+            login:function () {
+                this.$http.post('localhost:8080/study/user/login',{userName:this.username,password:this.password},{emulateJSON:true}).then(function(res){
+                    console.log(res.data);
+                    window.location.href = 'index.html';
+                },function(res){
+                    console.log(res.status);
+                });
+            }
+        },
+
     });
 </script>
