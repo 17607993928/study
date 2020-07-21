@@ -1,41 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/message/js/message.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/login.css"/>
     <title>登录界面</title>
 </head>
 <body>
 <div id="login">
-    <form>
-        <input type="text" required="required" placeholder="用户名" v-model="username">
-        <input type="password" required="required" placeholder="密码" v-model="password">
-        <button id="doLogin" class="but" @click="login()">登录</button>
-    </form>
+    <input id="uname" type="text" required="required" placeholder="用户名">
+    <input id="password" type="password" required="required" placeholder="密码">
+    <input id="verifyInput" class="verifyInput" name="verifyInput" placeholder="请输入验证码">
+    <img class="verifyCode" onclick="changeCode()" src="getVerifyCode">
+    <button id="doLogin" class="but">登录</button>
 </div>
 
 </body>
 </html>
 
 <script type="text/javascript">
-    new Vue({
-        el:'#app',
-        data: {
-            message:'hello vue.js.',
-            username:'',
-            password:'',
-        },
-        methods:{
-            login:function () {
-                this.$http.post('localhost:8080/study/user/login',{userName:this.username,password:this.password},{emulateJSON:true}).then(function(res){
-                    console.log(res.data);
-                    window.location.href = 'index.html';
-                },function(res){
-                    console.log(res.status);
-                });
-            }
-        },
+    /*点击刷新验证码*/
+    function changeCode() {
+        var src = " getVerifyCode?" + new Date().getTime();     //加时间戳，防止浏览器利用缓存
+        $('.verifyCode').attr("src", src);      //jQuery写法
+    }
 
-    });
+    //登录
+    $('#doLogin').click(function () {
+        var uname = $('#uname').val();
+        var password = $('#password').val();
+        var verifyInput=$('#verifyInput').val();
+        $.ajax({
+            method: 'post',
+            url: 'http://localhost:8080/study/user/login',
+            data: {userName: uname, password: password,verifyCode:verifyInput},
+            dataType: 'json',
+            success: function (res) {
+                if (res.status) {
+                    $.message({
+                        message: res.message,
+                        type: 'success'
+                    });
+                    window.location.href='index.html';
+                } else {
+                    $.message({
+                        message: res.message,
+                        type: 'error'
+                    });
+                }
+
+                //验证失败刷新验证码
+                changeCode();
+            }
+        });
+    })
+
 </script>

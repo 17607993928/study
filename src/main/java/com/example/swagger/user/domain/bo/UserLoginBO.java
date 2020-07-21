@@ -25,6 +25,7 @@ public class UserLoginBO {
     @ApiModelProperty(value = "请输入密码")
     private String password;
 
-
+    @ApiModelProperty("验证码")
+    private String verifyCode;
 
 }

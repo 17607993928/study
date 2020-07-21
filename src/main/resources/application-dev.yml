@@ -10,13 +10,11 @@ spring:
     url: jdbc:mysql://localhost:3306/notes?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true  #数据库地址
     driver-class-name: com.mysql.cj.jdbc.Driver  #数据库连接池
     type: com.alibaba.druid.pool.DruidDataSource  #数据库连接池
-
   mvc:
     view:
       prefix: /  # 定位模板的目录
       suffix: .html   # 给返回的页面添加后缀名
-#    static-path-pattern: /**
-
+  #    static-path-pattern: /**
   resources:
     static-locations: classpath:/static/  #静态资源地址
 
@@ -35,10 +33,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-enums-package: com.example.swagger.**.enums  #枚举扫描包
 
-#log sql
-logging:
-  level:
-    com.xjs.dnf.dao: DEBUG
 
 # Swagger
 swagger:
@@ -56,4 +50,15 @@ weather:
   key: 7e9d7c12296f333b1749ac3f1c081fd9
   city: 杭州  #城市名
   type: base  #实时天气
+
+#token配置
+jwt:
+  key: jfssdknlgsiwqhtklnvxksajhfuebxkhsgkbvskbvshrybvjkhb  #token秘钥
+  failureTime: 3600000  #token过期时间
+
+#验证码大小配置
+verifyCode :
+  width : 300  #宽
+  height : 60  #高
+
 

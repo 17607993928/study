@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta charset="UTF-8">
+<title>jQuery提示框插件 - 站长素材</title>
+<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+<style>
+/* 非组件样式 */
+.btn{
+	margin-right:20px;
+}
+.p40{
+	padding:40px;
+}
+.mt20{
+	margin-top:20px;
+}
+.title{
+	font-weight:bold;
+	font-size:16px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="p40">
+	<p class="title">点击调用提示</p>
+	<button class="btn btn-info">信息提醒</button>
+	<button class="btn btn-success">成功提示</button>
+	<button class="btn btn-warning">警告提示</button>
+	<button class="btn btn-danger">失败提示</button>
+	<button class="btn btn-default">拓展一下</button>
+</div>
+
+<div class="p40">
+<p class="title">调用方式：</p>
+<pre>$('.btn-info').on('click',function(){
+    $.message({
+        message:'信息提醒',
+        type:'info'
+    });
+})
+$('.btn-success').on('click',function(){
+    $.message({
+        message:'成功提示',
+        type:'success'
+    });
+})
+$('.btn-warning').on('click',function(){
+    $.message({
+        message:'警告提示',
+        type:'warning',
+	duration:0,
+	showClose:true,
+	center:true,
+	onClose:function(){alert('知道了')}
+    });
+})
+$('.btn-danger').on('click',function(){
+    $.message({
+        message:'失败提示',
+        type:'error'
+    });
+})
+</pre>
+<p class="mt20 title">参数详解：</p>
+<pre>message:' 操作成功',    //提示信息
+duration:'5000',       //显示时间（默认：5s）
+type:'info',           //显示类型，包括4种：success.error,info,warning 默认info
+showClose:false,       //显示关闭按钮（默认：否）
+center:true,           //页面竖直居中（默认：否）
+onClose:function,      //点击关闭回调函数
+</pre>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/message.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.btn-success').on('click',function(){
+		$.message({
+			message:'成功',
+			type:'success'
+		});
+	})
+	$('.btn-danger').on('click',function(){
+		$.message({
+			message:'失败提示',
+			type:'error'
+		});
+	})
+	$('.btn-warning').on('click',function(){
+		$.message({
+			message:'警告提示',
+			type:'warning',
+			duration:0,
+			showClose:true,
+			center:true,
+			onClose:function(){alert('知道了')}
+		});
+	})
+	$('.btn-info').on('click',function(){
+		$.message({
+			message:'信息提醒',
+			type:'info'
+		});
+	})
+	$('.btn-default').on('click',function(){
+		$.message({
+			type:'success',
+			message:'<div style="color:#333;font-weight:bold;font-size:16px;">用户信息保存成功<div><span style="color:lightgrey;font-size:small;">3秒后自动关闭</span>',
+			duration:3000,
+			center:true
+		})
+	})
+})
+</script>
+
+<div style="text-align:center;margin:10px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：360、FireFox、Chrome、Opera、傲游、搜狗、世界之窗. 不支持Safari、IE8及以下浏览器。</p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+</html>
