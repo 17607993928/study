@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/common.js"></script>
     <script src="../js/message/js/message.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/login.css"/>
     <title>登录界面</title>
@@ -33,7 +34,7 @@
         var verifyInput=$('#verifyInput').val();
         $.ajax({
             method: 'post',
-            url: 'http://localhost:8080/study/user/login',
+            url: path+'user/login',
             data: {userName: uname, password: password,verifyCode:verifyInput},
             dataType: 'json',
             success: function (res) {
@@ -42,7 +43,7 @@
                         message: res.message,
                         type: 'success'
                     });
-                    window.location.href='index.html';
+                    window.location.href='../html/index.html';
                 } else {
                     $.message({
                         message: res.message,

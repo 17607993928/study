@@ -1,11 +1,11 @@
-package com.example.swagger.tool.weather.business.impl;
+package com.example.swagger.weather.manager.impl;
 
+import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.swagger.common.utils.PureNetUtil;
-import com.example.swagger.tool.weather.business.GaodeWeather;
-import com.example.swagger.tool.weather.dao.WeatherDao;
-import com.example.swagger.tool.weather.domain.WeatherPO;
+import com.example.swagger.weather.manager.GaodeWeather;
+import com.example.swagger.weather.dao.WeatherDao;
+import com.example.swagger.weather.domain.po.WeatherPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -78,7 +78,7 @@ public class GaoDeWeatherImpl implements GaodeWeather {
         String type=parm.get("type");
         String url="https://restapi.amap.com/v3/weather/weatherInfo?key="+ key +"&city="+city+"&extensions="+type+"";
         log.info(url);
-        return PureNetUtil.get(url);
+        return HttpUtil.get(url);
     }
 
 }

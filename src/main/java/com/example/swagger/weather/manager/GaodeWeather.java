@@ -1,4 +1,4 @@
-package com.example.swagger.tool.weather.business;
+package com.example.swagger.weather.manager;
 
 import java.util.Map;
 

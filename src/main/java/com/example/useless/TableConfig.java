@@ -1,12 +1,11 @@
-package com.example.swagger.configuration;
+package com.example.useless;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.example.swagger.tool.weather.domain.WeatherPO;
+import com.example.swagger.weather.domain.po.WeatherPO;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -19,7 +18,7 @@ import java.sql.Connection;
  * @创建人:xiejs
  * @创建时间:2020-7-9 10:46:27
  */
-@Configuration
+//@Configuration
 public class TableConfig {
     /**
      * 创建表DDL语句

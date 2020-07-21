@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 @EnableSwagger2
-public class Swagger2Config {
+public class Swagger2Configuration {
 
     @Value("${swagger.title}")
     private String title;

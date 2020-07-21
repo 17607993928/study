@@ -1,6 +1,6 @@
 package com.example.swagger.tool.IPLocation.business;
 
-import com.example.swagger.common.utils.PureNetUtil;
+import cn.hutool.http.HttpUtil;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -19,7 +19,7 @@ public class IP {
     public  String excute(Map<String,String> parm){
         String ip=parm.get("ip");
         String url="https://restapi.amap.com/v3/ip?ip="+ip+"&key="+key;
-        return PureNetUtil.get(url);
+        return HttpUtil.get(url);
     }
 
     @SneakyThrows

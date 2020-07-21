@@ -1,7 +1,7 @@
-package com.example.swagger.tool.weather.business.controller;
+package com.example.swagger.weather.controller;
 
 import com.example.swagger.common.utils.AjaxMessage;
-import com.example.swagger.tool.weather.business.GaodeWeather;
+import com.example.swagger.weather.manager.GaodeWeather;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @创建人 xjs
- * @类描述 TODO
+ * @类描述
  * @创建时间 2020/4/10 0010 下午 21:53
  */
 @RestController
@@ -26,9 +26,9 @@ public class weatherController {
 
     @GetMapping
     @ApiOperation("获取高德天气")
-    public AjaxMessage getWeather(){
+    public AjaxMessage getWeather(String city){
         Map<String, String> parm = new HashMap<>();
-        parm.put("city", "萍乡市");
+        parm.put("city", city);
         parm.put("type", "base");
         gaodeWeather.GetWeatherByCity(parm);
         return AjaxMessage.success();

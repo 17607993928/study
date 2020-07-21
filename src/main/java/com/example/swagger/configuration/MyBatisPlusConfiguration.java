@@ -1,17 +1,12 @@
 package com.example.swagger.configuration;
 
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.SqlExplainInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.example.swagger.common.mybatisplus.MySqlInjector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @类描述:my
@@ -19,7 +14,7 @@ import java.util.List;
  * @创建时间:2020-5-19
  */
 @Configuration
-public class myBatisPlusConfig {
+public class MyBatisPlusConfiguration {
 
     //分页插件
     @Bean
@@ -39,7 +34,7 @@ public class myBatisPlusConfig {
     @Bean
     public PerformanceInterceptor performanceInterceptor(){
         PerformanceInterceptor performanceInterceptor=new PerformanceInterceptor();
-        performanceInterceptor.setMaxTime(100)
+        performanceInterceptor.setMaxTime(10000)
         ;
         return performanceInterceptor;
     }

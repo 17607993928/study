@@ -1,6 +1,6 @@
 package com.example.swagger.tool.scheduledtask;
 
-import com.example.swagger.tool.weather.business.GaodeWeather;
+import com.example.swagger.weather.manager.GaodeWeather;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class springTask {
         log.info("springtask 定时任务！");
     }*/
 
-//    @Scheduled(initialDelay = 1000,fixedRate = 1000)
+    @Scheduled(initialDelay = 1000,fixedRate = 36000)
     public void getWeather(){
         Map<String,String> map =new HashMap<>();
         map.put("city",city);

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/message/js/message.js"></script>
+    <title>首页</title>
+</head>
+<body>
+<button id="weather">天气预报</button>
+<button id="logout" value="">退出</button>
+</body>
+</html>
+<script>
+    $('#logout').click(function () {
+        $.ajax({
+            method: 'get',
+            url: 'http://localhost:8080/study/user/logout',
+            data: {},
+            dataType: 'json',
+            success: function (res) {
+                if (res.status) {
+                    $.message({
+                        message: res.message,
+                        type: 'success'
+                    });
+                    window.location.href='../user/doLogin';  /*  ../表示退出static层   */
+                } else {
+                    $.message({
+                        message: res.message,
+                        type: 'error'
+                    });
+                }
+            }
+        });
+    })
+
+</script>
+

@@ -1,1 +1,0 @@
-CREATE TABLE weather id INT , adcode VARCHAR , cityName VARCHAR , province VARCHAR , weather VARCHAR , temperature VARCHAR , windDirection VARCHAR , windPower VARCHAR , humidity VARCHAR , reporttime VARCHAR , remarks VARCHAR , weatherTime DATETIME , 

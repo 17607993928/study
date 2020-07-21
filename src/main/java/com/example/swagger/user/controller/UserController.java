@@ -4,6 +4,7 @@ import com.example.swagger.common.utils.AjaxMessage;
 import com.example.swagger.common.utils.JwtUtil;
 import com.example.swagger.common.utils.VerifyCode;
 import com.example.swagger.user.domain.bo.UserLoginBO;
+import com.example.swagger.user.proxy.LoginProxy;
 import com.example.swagger.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
+    private LoginProxy loginProxy;
+    @Autowired
     private JwtUtil jwtUtil;
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -54,24 +57,27 @@ public class UserController {
     @PostMapping("login")
     @ResponseBody
     public AjaxMessage login(UserLoginBO userLoginBO, HttpServletRequest request) {
-        Boolean login = userService.login(userLoginBO);
         //从session中获取验证码
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
 
-        if (!login) {
-            return AjaxMessage.error("账号或密码错误！");
-        } else {
-            if (!verifyCode.equalsIgnoreCase(userLoginBO.getVerifyCode())) {
-                return AjaxMessage.error("验证码错误！");
-            }
-            //其他数据以map集合存放在token中
-            Map<String, Object> dataMap = new HashMap<>();
-
-            //生成token并存入数据返回
-            String token = jwtUtil.createJwt(userLoginBO.getUserName(), userLoginBO.getPassword(), dataMap);
-            return AjaxMessage.success().data(token);
+        if (!verifyCode.equalsIgnoreCase(userLoginBO.getVerifyCode())) {
+            return AjaxMessage.error("验证码错误！");
         }
+
+        Boolean login = loginProxy.sendMailLogin(userLoginBO);
+        if(!login){
+            return AjaxMessage.error("账号或密码错误！");
+        }
+
+        //其他数据以map集合存放在token中
+        Map<String, Object> dataMap = new HashMap<>();
+
+        //生成token并存入数据返回
+        String token = jwtUtil.createJwt(userLoginBO.getUserName(), userLoginBO.getPassword(), dataMap);
+        return AjaxMessage.success().data(token);
     }
+
+
 
     @GetMapping("logout")
     @ResponseBody
@@ -83,6 +89,8 @@ public class UserController {
         }
         return AjaxMessage.success("退出成功");
     }
+
+
 
 
     /**
