@@ -2,6 +2,8 @@ package com.example.swagger.user.proxy;
 
 import cn.hutool.extra.mail.MailUtil;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @类描述:子线程发送邮箱
@@ -10,6 +12,8 @@ import lombok.Data;
  */
 @Data
 public class SendMail implements Runnable {
+    private static final Logger log = LoggerFactory.getLogger(SendMail.class);
+
     private String subject;
 
     private String content;
@@ -23,7 +27,8 @@ public class SendMail implements Runnable {
     @Override
     public void run() {
         try {
-            MailUtil.send("1294405880@qq.com", getSubject(), getContent(), false);
+            String send = MailUtil.send("1294405880@qq.com", getSubject(), getContent(), false);
+            log.info("邮件已发送！"+send);
         } catch (Exception e) {
             e.printStackTrace();
         }

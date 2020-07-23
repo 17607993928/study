@@ -7,7 +7,7 @@ spring:
   datasource:
     username: root  #数据库账号
     password: root  #数据库密码
-    url: jdbc:mysql://localhost:3306/notes?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true  #数据库地址
+    url: jdbc:mysql://localhost:3306/notes?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true  #数据库地址
     driver-class-name: com.mysql.cj.jdbc.Driver  #数据库连接池
     type: com.alibaba.druid.pool.DruidDataSource  #数据库连接池
   mvc:

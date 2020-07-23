@@ -5,11 +5,14 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.swagger.weather.dao.WeatherDao;
+import com.example.swagger.weather.domain.dto.WeatherDTO;
 import com.example.swagger.weather.domain.po.WeatherPO;
 import com.example.swagger.weather.service.WeatherService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +28,13 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherDao, WeatherPO> imple
 
 
     @Override
-    public List<WeatherPO> getWeatherByCityAndDate(String city, Date date) {
+    public List<WeatherDTO> getWeatherByCityAndDate(String city, Date date) {
         QueryWrapper<WeatherPO> queryWrapper=new QueryWrapper();
         queryWrapper.like("city_name",city);
+        //去重
+        queryWrapper.select("DISTINCT reporttime,city_name,province,weather ,temperature ,wind_direction ,wind_power ,humidity");
+        //排序
+        queryWrapper.orderByAsc("reporttime");
 
         //获取一天的开始到结束
         DateTime beginOfDay = DateUtil.beginOfDay(date);
@@ -35,16 +42,19 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherDao, WeatherPO> imple
 
         queryWrapper.between("reporttime",beginOfDay.toString(),endOfDay.toString());
         List<WeatherPO> weatherPOList = weatherDao.selectList(queryWrapper);
-        return weatherPOList;
+        List<WeatherDTO> weatherDTOList=new ArrayList<>();
+        weatherPOList.forEach(weatherPO -> {
+            WeatherDTO weatherDTO = poToDto(weatherPO);
+            weatherDTOList.add(weatherDTO);
+        });
+        return weatherDTOList;
     }
 
-    public static void main(String[] args) {
-        Date date=new Date();
-        DateTime beginOfDay = DateUtil.beginOfDay(date);
-        DateTime endOfDay = DateUtil.endOfDay(date);
-
-        String s = beginOfDay.toString();
-        System.out.println(s);
-
+    private WeatherDTO poToDto(WeatherPO weatherPO){
+        WeatherDTO weatherDTO=new WeatherDTO();
+        BeanUtils.copyProperties(weatherPO,weatherDTO);
+        return weatherDTO;
     }
+
+
 }

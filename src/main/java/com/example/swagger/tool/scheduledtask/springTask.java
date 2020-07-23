@@ -41,7 +41,7 @@ public class springTask {
         log.info("springtask 定时任务！");
     }*/
 
-    @Scheduled(initialDelay = 1000,fixedRate = 36000)
+    @Scheduled(initialDelay = 1000,fixedRate = 3600000)
     public void getWeather(){
         Map<String,String> map =new HashMap<>();
         map.put("city",city);

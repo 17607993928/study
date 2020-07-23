@@ -1,6 +1,7 @@
 package com.example.swagger.weather.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.swagger.weather.domain.dto.WeatherDTO;
 import com.example.swagger.weather.domain.po.WeatherPO;
 
 import java.util.Date;
@@ -16,5 +17,5 @@ public interface WeatherService extends IService<WeatherPO> {
      * 根据城市和日期获取天气
      * @return
      */
-    List<WeatherPO> getWeatherByCityAndDate(String city, Date date);
+    List<WeatherDTO> getWeatherByCityAndDate(String city, Date date);
 }
