@@ -3,9 +3,12 @@ package com.example.swagger.user.controller;
 import com.example.swagger.common.utils.AjaxMessage;
 import com.example.swagger.common.utils.JwtUtil;
 import com.example.swagger.common.utils.VerifyCode;
+import com.example.swagger.user.domain.bo.UserBO;
 import com.example.swagger.user.domain.bo.UserLoginBO;
 import com.example.swagger.user.proxy.LoginProxy;
 import com.example.swagger.user.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("user")
+@Api(tags = "用户管理")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -56,6 +60,7 @@ public class UserController {
 
     @PostMapping("login")
     @ResponseBody
+    @ApiOperation("登录")
     public AjaxMessage login(UserLoginBO userLoginBO, HttpServletRequest request) {
         //从session中获取验证码
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
@@ -77,8 +82,7 @@ public class UserController {
         return AjaxMessage.success().data(token);
     }
 
-
-
+    @ApiOperation("退出")
     @GetMapping("logout")
     @ResponseBody
     public AjaxMessage logout(HttpServletRequest request) {
@@ -90,12 +94,20 @@ public class UserController {
         return AjaxMessage.success("退出成功");
     }
 
+    @ApiOperation("注册用户")
+    @PostMapping("createUser")
+    public AjaxMessage createUser(UserBO userBO){
+        userService.createUser(userBO);
+        return AjaxMessage.success();
+    }
+
 
 
 
     /**
      * 生成验证码
      */
+    @ApiOperation("生成验证码")
     @GetMapping("getVerifyCode")
     public void getVerificationCode(HttpServletResponse response, HttpServletRequest request) {
         try {

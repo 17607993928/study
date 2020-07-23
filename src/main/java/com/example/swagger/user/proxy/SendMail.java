@@ -30,7 +30,7 @@ public class SendMail implements Runnable {
             String send = MailUtil.send("1294405880@qq.com", getSubject(), getContent(), false);
             log.info("邮件已发送！"+send);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("邮件发送失败！"+e);
         }
     }
 }

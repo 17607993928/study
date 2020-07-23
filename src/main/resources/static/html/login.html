@@ -5,7 +5,12 @@
     <script src="../js/jquery-3.5.1.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/message/js/message.js"></script>
+    <script src="../js/layer_v/layer.js"></script>
+    <script src="../js/jqueryEsayUI/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/jqueryEsayUI/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../js/jqueryEsayUI/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+
     <title>登录界面</title>
 </head>
 <body>
@@ -15,7 +20,26 @@
     <input id="verifyInput" class="verifyInput" name="verifyInput" placeholder="请输入验证码">
     <img class="verifyCode" onclick="changeCode()" src="getVerifyCode">
     <button id="doLogin" class="but">登录</button>
+    <button id="createUser" class="create" onclick="ShowLoginText()">注册用户</button>
 </div>
+
+<!--注册弹窗-->
+<div id="loginBox">
+    <div class="login-item"><input type="text" id="InputUsername" placeholder="请输入用户名"/></div>
+    <div class="login-item"><input type="password" id="InputUserPwd" placeholder="请输入密码"/></div>
+    <div class="login-item"><input type="password" id="InputUserPwdTo" placeholder="请再次输入密码"/></div>
+    <div class="login-item"><input type="text" id="personName" placeholder="请输入姓名"/></div>
+    <form id="ff" class="form">
+        <input class="easyui-radiobutton" name="sex" value="1" label="男">
+        <input class="easyui-radiobutton" name="sex" value="2" label="女">
+    </form>
+    <div class="login-item"><input type="text" id="telephone" placeholder="请输入手机号码"/></div>
+    <div class="login-item"><input type="text" id="email" placeholder="请输入电子邮箱"/></div>
+    <div class="login-item"><input type="text" id="description" placeholder="请输入描述"/></div>
+
+    <div class="login-item"><a href="javascript:;" onclick="register()">注册</a></div>
+</div>
+
 
 </body>
 </html>
@@ -27,15 +51,15 @@
         $('.verifyCode').attr("src", src);      //jQuery写法
     }
 
-    //登录
+    //登录接口
     $('#doLogin').click(function () {
         var uname = $('#uname').val();
         var password = $('#password').val();
-        var verifyInput=$('#verifyInput').val();
+        var verifyInput = $('#verifyInput').val();
         $.ajax({
             method: 'post',
-            url: path+'user/login',
-            data: {userName: uname, password: password,verifyCode:verifyInput},
+            url: path + 'user/login',
+            data: {userName: uname, password: password, verifyCode: verifyInput},
             dataType: 'json',
             success: function (res) {
                 if (res.status) {
@@ -43,7 +67,7 @@
                         message: res.message,
                         type: 'success'
                     });
-                    window.location.href='../html/index.html';
+                    window.location.href = '../html/index.html';
                 } else {
                     $.message({
                         message: res.message,
@@ -56,5 +80,28 @@
             }
         });
     })
+
+    //注册的弹窗
+    function ShowLoginText() {
+        layer.open({
+            type: 1,
+            title: "注册",
+            area: ["395px", "600px"],
+            content: $("#loginBox"),
+        });
+    }
+
+    //注册字段校验
+    function register() {
+        var username = $.trim($("#InputUsername").val());//获取用户名trim是去掉空格
+        var password = $.trim($("#InputUserPwd").val());//获取密码
+        if (username == "" || password == "") {
+            layer.alert("用户名或者密码不能为空!", {
+                title: "提示",
+                icon: 5,
+            });
+        }
+    }
+
 
 </script>

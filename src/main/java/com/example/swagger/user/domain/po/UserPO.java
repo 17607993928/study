@@ -2,6 +2,8 @@ package com.example.swagger.user.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,14 +17,15 @@ import java.io.Serializable;
 @TableName("USER")
 public class UserPO extends Model<UserPO> implements Serializable {
     private static final long serialVersionUID = 6270451087401009279L;
+
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     private String userName;        //账号
 
     private String password;        //密码
 
+    private Long personId;          //人员id
 
-    public void test(String name){
-        System.out.println("我的名字是："+name);
-    }
+
 }
