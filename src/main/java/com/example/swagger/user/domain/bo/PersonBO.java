@@ -19,9 +19,6 @@ public class PersonBO implements Serializable {
     @ApiModelProperty("人名")
     private String personName;           
 
-    @ApiModelProperty("人员code")
-    private String personCode;           
-
     @ApiModelProperty("性别")
     private Integer sex;
 

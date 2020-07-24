@@ -2,14 +2,22 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!--自定义CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+
     <script src="../js/jquery-3.5.1.js"></script>
     <script src="../js/common.js"></script>
+
+    <!--消息弹窗-->
     <script src="../js/message/js/message.js"></script>
-    <script src="../js/layer_v/layer.js"></script>
-    <script src="../js/jqueryEsayUI/jquery.easyui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../js/jqueryEsayUI/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../js/jqueryEsayUI/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+
+    <!--hu UI-->
+    <script src="../js/h-ui/lib/layer/2.4/layer.js"></script>
+    <script src="../js/h-ui/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+    <script src="../js/h-ui/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script src="../js/h-ui/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+    <script src="../js/h-ui/static/h-ui/js/H-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/h-ui/static/h-ui/css/H-ui.min.css"/>
 
     <title>登录界面</title>
 </head>
@@ -29,15 +37,23 @@
     <div class="login-item"><input type="password" id="InputUserPwd" placeholder="请输入密码"/></div>
     <div class="login-item"><input type="password" id="InputUserPwdTo" placeholder="请再次输入密码"/></div>
     <div class="login-item"><input type="text" id="personName" placeholder="请输入姓名"/></div>
-    <form id="ff" class="form">
-        <input class="easyui-radiobutton" name="sex" value="1" label="男">
-        <input class="easyui-radiobutton" name="sex" value="2" label="女">
-    </form>
+
+    <div class="mt-20 skin-minimal">
+        <div class="radio-box">
+            <input type="radio" id="radio-1" name="demo-radio1" value="1">
+            <label for="radio-1">男</label>
+        </div>
+        <div class="radio-box">
+            <input type="radio" id="radio-2" name="demo-radio1" checked value="2">
+            <label for="radio-2">女</label>
+        </div>
+    </div>
+
     <div class="login-item"><input type="text" id="telephone" placeholder="请输入手机号码"/></div>
     <div class="login-item"><input type="text" id="email" placeholder="请输入电子邮箱"/></div>
     <div class="login-item"><input type="text" id="description" placeholder="请输入描述"/></div>
 
-    <div class="login-item"><a href="javascript:;" onclick="register()">注册</a></div>
+    <div class="login-item"><a href="javascript:;" onclick="register()" id="doRegister">注册</a></div>
 </div>
 
 
@@ -45,6 +61,15 @@
 </html>
 
 <script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        })});
+
+
+
     /*点击刷新验证码*/
     function changeCode() {
         var src = " getVerifyCode?" + new Date().getTime();     //加时间戳，防止浏览器利用缓存
@@ -86,22 +111,76 @@
         layer.open({
             type: 1,
             title: "注册",
-            area: ["395px", "600px"],
+            area: ["350px", "700px"],
             content: $("#loginBox"),
         });
     }
 
-    //注册字段校验
+    //注册字段校验及调用接口
     function register() {
         var username = $.trim($("#InputUsername").val());//获取用户名trim是去掉空格
         var password = $.trim($("#InputUserPwd").val());//获取密码
-        if (username == "" || password == "") {
+        var passwordTo = $.trim($("#InputUserPwdTo").val());//获取第二次密码
+        if(password !=passwordTo){
+
+        }
+
+        var personName = $('#personName').val();
+        if (username == "" || password == "" || personName=="") {
             layer.alert("用户名或者密码不能为空!", {
                 title: "提示",
                 icon: 5,
             });
         }
     }
+
+    //注册接口
+    $('#doRegister').click(function () {
+        var uname = $('#InputUsername').val();
+        var password = $('#InputUserPwdTo').val();
+        var personName = $('#personName').val();
+        var sex = $("input[name=demo-radio1]:checked").val();
+        var telephone = $("#telephone").val();
+        var email = $("#email").val();
+        var telephone = $("#telephone").val();
+        var description = $("#description").val();
+
+        var formData = new FormData();
+        formData.append("userName", uname);
+        formData.append("password", password);
+        formData.append("personBO.personName", personName);
+        formData.append("personBO.sex", sex);
+        formData.append("personBO.telephone", telephone);
+        formData.append("personBO.email", email);
+        formData.append("personBO.description", description);
+
+        $.ajax({
+            method: 'post',
+            url: path + 'user/createUser',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                console.log(res)
+                if (res.status) {
+                    $.message({
+                        message: res.message,
+                        type: 'success'
+                    });
+                    layer.close(1);
+
+                } else {
+                    $.message({
+                        message: res.message,
+                        type: 'error'
+                    });
+                }
+            }
+        });
+
+
+    })
 
 
 </script>

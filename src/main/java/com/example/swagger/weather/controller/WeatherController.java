@@ -46,7 +46,12 @@ public class WeatherController {
     @GetMapping("getWeather")
     @ApiOperation("根据城市日期获取天气")
     public AjaxMessage getWeatherByCityAndDate(String city, String date){
-        Date stringToDate = DateUtil.StringToDate(date, DateUtil.DATE_FORMAT_TIME_T);
+        Date stringToDate=null;
+        if(date.contains("-")){
+           stringToDate = DateUtil.StringToDate(date, DateUtil.DATE_FORMAT_TIME_T);
+        }else if(date.contains("/")){
+            stringToDate=DateUtil.StringToDate(date,"MM/dd/yyyy");
+        }
         List<WeatherDTO> weatherDTOList = weatherService.getWeatherByCityAndDate(city, stringToDate);
         for (WeatherDTO weatherDTO : weatherDTOList) {
             String reporttime = weatherDTO.getReporttime();

@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 CREATE TABLE `note` (
-  `id` int NOT NULL,
+  `id` bigint NOT NULL,
   `theme` varchar(255) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   `upDate` datetime DEFAULT NULL,

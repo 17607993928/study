@@ -6,14 +6,18 @@
     <script src="../js/common.js"></script>
     <script src="../js/echarts.js"></script>
     <script src="../js/message/js/message.js"></script>
-    <script src="../js/vue.js"></script>
 
+    <script src="../js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/jquery-ui-1.12.1/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="../js/jquery-ui-1.12.1/jquery-ui.structure.css"/>
+    <link rel="stylesheet" type="text/css" href="../js/jquery-ui-1.12.1/jquery-ui.theme.css"/>
     <title>天气</title>
 </head>
 <body>
+<div style="width: 1800px;height: 100px;border: 0px solid white;margin: auto">
+    <p>日期：<input type="text" id="datepicker" onchange="date()"></p>
+</div>
 <div id="app">
-    <div style="width: 1800px;height: 100px;border: 0px solid white;margin: auto">
-    </div>
     <div id="main" style="margin:0px auto  ;width: 1800px;height: 600px;border: 0px solid white; ">
     </div>
 </div>
@@ -21,126 +25,130 @@
 </body>
 </html>
 <script>
+    $("#datepicker").datepicker();
 
-    $(function () {
+    function date() {
+        var val = $("#datepicker").val();
+        console.log(val)
 
-        new Vue({
-            el: "#app",//将vue挂载到html中你创建的那个带id="main"上
-            data() {
-                return {}
-            },
 
-            created: function () {
 
-            },
+        ajax(val);
 
-            mounted() {
-                //处理时间
-                function handleDate(){
-                    var format = new Date().format("yyyy-MM-dd HH:mm:ss");
-                    return format;
+    }
+
+
+    //ajax统一处理
+    function ajax(date){
+        //处理时间
+        function handleDate() {
+            var format = new Date().format("yyyy-MM-dd HH:mm:ss");
+            return format;
+        }
+
+        var reportTimeData = new Array();
+        var temperature = new Array();
+
+        var dt = date;
+        if(dt=='' || dt==null){
+            dt=handleDate();
+        }
+
+        $.ajax({
+                method: 'get',
+                url: path + 'weather/getWeather',
+                data: {city: '杭州', date:dt},
+                dataType: 'json',
+                success: function (res) {
+
+                    for (var i = 0; i < res.data.length; i++) {
+                        reportTimeData.push(res.data[i].reporttime);
+                        temperature.push(res.data[i].temperature);
+                    }
+
+                    if (res.status) {
+
+                        eCharsPolyline();
+
+                        $.message({
+                            message: res.message,
+                            type: 'success'
+                        });
+
+                    } else {
+                        $.message({
+                            message: res.message,
+                            type: 'error'
+                        });
+                    }
                 }
-
-                var reportTimeData = new Array();
-                var temperature = new Array();
-
-                $.ajax({
-                        method: 'get',
-                        url: path + 'weather/getWeather',
-                        data: {city: '杭州', date: handleDate()},
-                        dataType: 'json',
-                        success: function (res) {
-
-                            for (var i = 0; i < res.data.length; i++) {
-                                reportTimeData.push(res.data[i].reporttime);
-                                temperature.push(res.data[i].temperature);
-                            }
-
-                            if (res.status) {
+            }
+        );
 
 
-                                eCharsPolyline();
+        /**
+         * 生成eChars图
+         */
+        function eCharsPolyline() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            var option = {
+                title: {
+                    text: '天气预报',     //标题文本
+                    textStyle: {         //字体风格
+                        color: '#173241',
+                        fontSize: '25',
+                    },
+                    left: '660px',      //标题居中
+                },
+                tooltip: {},
 
-                                $.message({
-                                    message: res.message,
-                                    type: 'success'
-                                });
+                legend: {
+                    data: ["天气"],
+                },
 
-                            } else {
-                                $.message({
-                                    message: res.message,
-                                    type: 'error'
-                                });
+                toolbox: {      //图片下载
+                    show: true,
+                    feature: {
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+
+                xAxis: {
+                    data: reportTimeData,
+                    nameTextStyle: {
+                        fontWeight: 'bold'
+                    }
+                },
+                yAxis: {
+                    data: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+                },
+                series: [{
+                    name: '天气',
+                    type: 'line',
+                    data: temperature,
+                    itemStyle: {
+                        normal: {
+                            color: '#cf1257', //折点颜色
+                            lineStyle: {
+                                color: '#ff9c35' //折线颜色
                             }
                         }
                     }
-                );
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+    }
 
 
-                /**
-                 * 生成eChars图
-                 */
-                function eCharsPolyline() {
-                    // 基于准备好的dom，初始化echarts实例
-                    var myChart = echarts.init(document.getElementById('main'));
-                    var option = {
-                        title: {
-                            text: '天气预报',     //标题文本
-                            textStyle: {         //字体风格
-                                color: '#173241',
-                                fontSize: '25',
-                            },
-                            left: '660px',      //标题居中
-                        },
-                        tooltip: {},
-
-                        legend: {
-                            data: ["天气"],
-                        },
-
-                        toolbox: {      //图片下载
-                            show: true,
-                            feature: {
-                                saveAsImage: {
-                                    show: true
-                                }
-                            }
-                        },
-
-                        xAxis: {
-                            data: reportTimeData,
-                            nameTextStyle: {
-                                fontWeight: 'bold'
-                            }
-                        },
-                        yAxis: {
-                            data: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
-                        },
-                        series: [{
-                            name: '天气',
-                            type: 'line',
-                            data: temperature,
-                            itemStyle:{
-                                normal:{
-                                    color:'#cf1257', //折点颜色
-                                    lineStyle:{
-                                        color:'#ff9c35' //折线颜色
-                                    }
-                                }
-                            }
-                        }]
-                    };
-                    // 使用刚指定的配置项和数据显示图表。
-                    myChart.setOption(option);
-                }
 
 
-            },
-            methods: {}
-        })
-
-
-    });
-
+    $(function () {
+        ajax();
+    })
 
 </script>

@@ -96,9 +96,10 @@ public class UserController {
 
     @ApiOperation("注册用户")
     @PostMapping("createUser")
+    @ResponseBody
     public AjaxMessage createUser(UserBO userBO){
-        userService.createUser(userBO);
-        return AjaxMessage.success();
+        AjaxMessage message = userService.createUser(userBO);
+        return message;
     }
 
 
