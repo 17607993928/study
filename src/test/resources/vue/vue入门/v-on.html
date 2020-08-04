@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-on</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+<div id="app">
+    <input type="button" value="v-on指令" @click="doit">
+
+    <h1> {{message}}</h1>
+
+</div>
+</body>
+</html>
+<script>
+    var vue =new Vue({
+        el: '#app',
+        data: {
+            message:'好吃不上火',
+        },
+        methods:{
+          doit:function () {
+              this.message+='好好吃！'
+          }
+        },
+    })
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计数器</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+<div id="app">
+    <button @click="add">+</button>
+    <p>{{num}}</p>
+    <button @click="sub">-</button>
+</div>
+
+
+</body>
+</html>
+<script>
+    var vue =new Vue({
+        el:"#app",
+        data:{
+            num:0,
+        },
+
+        methods:{
+            add:function () {
+                if(this.num>=10){
+                    alert("数量不能超过"+this.num+"");
+                    return;
+                }
+                this.num++;
+            },
+            sub:function () {
+                if(this.num<=0){
+                    alert("数量不能小于"+this.num+"");
+                    return;
+                }
+               this.num--;
+            }
+        }
+    })
+</script>

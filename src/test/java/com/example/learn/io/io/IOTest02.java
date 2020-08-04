@@ -20,7 +20,7 @@ public class IOTest02 {
 
 	public static void main(String[] args) {
 		//1、创建源
-		File src = new File("abc.txt");
+		File src = new File("E:\\新建文件夹\\新建文本文档.txt");
 		//2、选择流
 		InputStream  is =null;
 		try {

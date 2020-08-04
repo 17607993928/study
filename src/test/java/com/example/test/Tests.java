@@ -1,4 +1,4 @@
-package com.test;
+package com.example.test;
 
 import cn.hutool.extra.mail.MailUtil;
 import org.junit.jupiter.api.Test;
