@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>记事本</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message" @keyup.enter="add()">
+    <ul>
+        <li v-for="(item,index) in arr">
+            {{index+1}}.{{item}}  <button @click="del(index)">删除</button>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var vue =new Vue({
+        el: '#app',
+        data: {
+            arr:[],
+            message:'',
+        },
+        methods:{
+            add:function () {
+                this.arr.push(this.message);
+            },
+            del:function (index) {
+                this.arr.splice(index,1);
+            }
+        },
+    })
+</script>

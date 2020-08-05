@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(arr,index) in arr">
+            {{arr}}
+        </li>
+    </ul>
+
+</div>
+</body>
+</html>
+<script>
+    var vue =new Vue({
+        el: '#app',
+        data: {
+            arr:[100,1000,10000,100000,1000000,10000000],
+        }
+    })
+</script>

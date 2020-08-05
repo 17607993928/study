@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片切换</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+<div id="app">
+    <button v-on:click="left" v-show="index!=0"><</button>
+    <img v-bind:src="imgSrc[index]">
+    <button @click="right"v-show="index<imgSrc.length-1">> </button>
+</div>
+</body>
+</html>
+<script>
+    var vue =new Vue({
+        el: '#app',
+        data: {
+            imgSrc:[
+                "../../image/下载.png",
+                "../../image/下载 (1).png",
+                "../../image/下载 (2).png",
+                "../../image/下载 (3).png",
+                "../../image/下载 (4).png",
+                "../../image/下载 (5).png",
+                "../../image/下载6.png",
+                "../../image/下载7.png",
+                "../../image/下载8.png",
+                "../../image/下载9.png",
+                "../../image/下载10.png",
+                "../../image/下载11.png",
+            ],
+            index:0,
+        },
+        methods:{
+          left:function () {
+              this.index--;
+          },
+          right:function () {
+              this.index++;
+
+          }
+
+        }
+    })
+</script>

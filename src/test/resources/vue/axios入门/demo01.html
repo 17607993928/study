@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<body>
+<div id="app">
+    <button @click="doit()">点击</button>
+    <h1 v-text="message">{{ message }}</h1>
+</div>
+</body>
+</html>
+<script>
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: "xxx",
+        },
+        methods: {
+            doit: function () {
+                var that=this;  //异步里面获取不到this
+                axios.get('https://autumnfish.cn/api/joke')
+                    .then(function (response) {
+                        that.message = response.data;
+                        console.log(this.message)
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+
+            dos:function () {
+                this.message="sb";
+            }
+        }
+
+    })
+</script>

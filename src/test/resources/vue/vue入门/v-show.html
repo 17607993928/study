@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-show</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+<div id="app">
+    <button  v-on:click="show">点击</button>
+    <h1 v-show="isShow">你是傻逼</h1>
+</div>
+
+
+</body>
+</html>
+<script>
+    var vue =new Vue({
+        el: '#app',
+        data: {
+            isShow:false,
+        },
+        methods:{
+            show:function () {
+                if(this.isShow){
+                    this.isShow=false;
+                }else {
+                    this.isShow=true;
+                }
+            }
+        }
+    })
+</script>
